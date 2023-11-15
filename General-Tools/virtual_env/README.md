@@ -1,5 +1,7 @@
 a simple script to help creating a python venv automatic.
 
+Yes this can be done manually using the below process but everything is good practice :D 
+
 ```python -m venv </path/to/virtual/env>```
 
 Once created you must activate your venv
