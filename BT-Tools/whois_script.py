@@ -48,14 +48,3 @@ if __name__ == "__main__":
         x = threading.Thread(target=thread_func, args=(domain,index))
         threads.append(index)
         x.start()
-    
-    while x.is_alive():
-        time.sleep(0.1)
-        continue
-    else:
-        print("""
-    =============
-    All threads completed results output to whois_output.txt
-    =============
-    """)
- 
