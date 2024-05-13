@@ -34,7 +34,8 @@ def thread_func(domain,index):
     with open("whois_output.txt", "a") as f:
         output = subprocess.run(f"{whois_directory} -v {domain}", capture_output=True)
         f.write(f"{domain}\n\n=====================================================================================\n\n{str(output.stdout, encoding='utf-8', errors='namereplace')}\n\n =====================================================================================\n\n")
-
+    logging.info("Main    : thread %d done", index)
+    
 if __name__ == "__main__":
     format = "%(asctime)s: %(message)s"
     logging.basicConfig(format=format, level=logging.INFO,
@@ -46,10 +47,6 @@ if __name__ == "__main__":
         x = threading.Thread(target=thread_func, args=(domain,index))
         threads.append(index)
         x.start()
-
-    for index, thread in enumerate(threads):
-        logging.info("Main    : before joining thread %d.", index)
-        logging.info("Main    : thread %d done", index)
 
 print("""
 =============
