@@ -30,7 +30,7 @@ Starting threading process
 =============
 """)
 
-def thread_func(domain):
+def thread_func(domain,index):
     with open("whois_output.txt", "a") as f:
         output = subprocess.run(f"{whois_directory} -v {domain}", capture_output=True)
         f.write(f"{domain}\n\n=====================================================================================\n\n{str(output.stdout, encoding='utf-8', errors='namereplace')}\n\n =====================================================================================\n\n")
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     threads = list()
     for index,domain in enumerate(domains):
         logging.info("Main  : create and start thread %d.", index)
-        x = threading.Thread(target=thread_func, args=(domain))
+        x = threading.Thread(target=thread_func, args=(domain,index))
         threads.append(index)
         x.start()
 
