@@ -1,6 +1,7 @@
 # Script to whois a large number of domains. 
 # Ensure that your list of domains is saved in a text file on seperate lines, in your current working directory. Ensure it is called domain_list.txt
 # Will create an output file containing the response for each domain 
+# You will encounter some errors, for certain domains, this is due to being unable to decode the output into utf-8 - likely due to foreign languages etc.
 
 import subprocess
 import threading
@@ -47,10 +48,14 @@ if __name__ == "__main__":
         x = threading.Thread(target=thread_func, args=(domain,index))
         threads.append(index)
         x.start()
-
-print("""
-=============
-All threads completed results output to whois_output.txt
-=============
-""")
+    
+    while x.is_alive():
+        time.sleep(0.1)
+        continue
+    else:
+        print("""
+    =============
+    All threads completed results output to whois_output.txt
+    =============
+    """)
  
